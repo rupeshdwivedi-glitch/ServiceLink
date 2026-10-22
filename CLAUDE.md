@@ -8,6 +8,8 @@ ServiceLink is a full-stack web app that helps customers find and book local ser
 
 Current state: Phase 1 scaffolding only (empty backend/frontend skeletons, no business logic). See the phased plan below before adding features out of order.
 
+Scaffold details worth knowing: `main.py` only defines `GET /` and does not include any routers yet. `frontend/src/api/*.ts` are placeholder comments. No CORS middleware on the backend and no API proxy in `vite.config.ts`, so one of these is needed before the frontend can call the API.
+
 ## Stack
 
 - Frontend: React + Vite + TypeScript + Tailwind CSS
@@ -21,11 +23,13 @@ Current state: Phase 1 scaffolding only (empty backend/frontend skeletons, no bu
 
 ```
 python -m venv .venv
-.venv\Scripts\activate
+.venv\Scripts\activate      # Linux/macOS: source .venv/bin/activate
 pip install -r requirements.txt
-copy .env.example .env      # fill in DATABASE_URL and JWT_SECRET_KEY
+copy .env.example .env      # Linux/macOS: cp .env.example .env. Fill in DATABASE_URL and JWT_SECRET_KEY
 uvicorn app.main:app --reload
 ```
+
+Always start uvicorn from `backend/`: `core/config.py` loads `.env` via a relative path, and `database_url` / `jwt_secret_key` default to empty strings, so running from elsewhere fails silently instead of erroring.
 
 No test suite or linter is configured yet.
 
@@ -38,6 +42,12 @@ npm run build           # tsc -b && vite build
 ```
 
 No test suite configured yet. Type-check only via `npm run build` or `npx tsc -b`.
+
+### Slash commands and permissions
+
+Project commands live in `.claude/commands/`: `/next-phase` (propose and implement the next small step of the build order, confirming with the user first), `/run-backend`, `/run-frontend`.
+
+The `Read(//c/ServiceLink/**)` rules in `.claude/settings.json`, including the `.env` deny rules, are Windows paths and do not match a Linux checkout such as `/workspaces/ServiceLink`.
 
 ## Architecture
 
