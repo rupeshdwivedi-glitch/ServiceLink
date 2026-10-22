@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git branch*)",
+      "Bash(git checkout -b *)",
+      "Bash(npm install*)",
+      "Bash(npm run *)",
+      "Bash(npx tsc*)",
+      "Bash(pip install*)",
+      "Bash(python -m venv*)",
+      "Bash(uvicorn*)",
+      "Read(//c/ServiceLink/**)"
+    ],
+    "deny": [
+      "Bash(git push --force*)",
+      "Bash(git reset --hard*)",
+      "Bash(rm -rf*)",
+      "Read(//c/ServiceLink/backend/.env)",
+      "Read(//c/ServiceLink/frontend/.env)"
+    ]
+  }
+}
