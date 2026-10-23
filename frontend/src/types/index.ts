@@ -1,11 +1,12 @@
 export type Role = 'customer' | 'provider'
+export type UserRole = Role | 'admin'
 export type BookingStatus = 'pending' | 'confirmed' | 'completed' | 'cancelled'
 
 export interface User {
   id: number
   name: string
   email: string
-  role: Role
+  role: UserRole
   created_at: string
 }
 
